@@ -1,0 +1,55 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<title>Meu Perfil — Análise Oceanográfica</title>
+<link rel="stylesheet" href="{% static 'dashboard/style.css' %}">
+<link rel="stylesheet" href="{% static 'core/style.css' %}">
+</head>
+<body>
+<header>
+  <h1>Análise Oceanográfica e Batimétrica</h1>
+  <nav>
+    <a href="/">🗺️ Dashboard</a> ·
+    <a href="/surveys/">⚓ Batimetria</a> ·
+    {% if user.is_staff %}<a href="/admin/">🛠️ Admin</a> ·{% endif %}
+    <a href="{% url 'core:logout' %}">Sair</a>
+  </nav>
+</header>
+<main class="auth-main">
+  <section class="auth-card">
+    <h2>Olá, {{ user.username }}</h2>
+    <p class="auth-info">
+      {{ user.email }}<br>
+      {% if user.is_staff %}
+        <span class="auth-badge-admin">Conta administrativa (staff)</span>
+      {% else %}
+        <span class="auth-badge">Conta padrão</span>
+      {% endif %}
+    </p>
+
+    <h3>Dados do perfil</h3>
+    <form method="post">
+      {% csrf_token %}
+      {% for field in form %}
+        <label>{{ field.label }}
+          {{ field }}
+        </label>
+      {% endfor %}
+      <button type="submit">SALVAR</button>
+    </form>
+
+    {% if user.is_staff %}
+      <h3>Ferramentas de administrador</h3>
+      <p class="auth-info">
+        Como conta de staff, você tem acesso a upload de arquivos pesados
+        (NetCDF/GRIB) via <code>/oceanography/geo-file/variables/</code> e
+        <code>/oceanography/geo-file/extract/</code>, além do
+        <a href="/admin/">Django Admin</a> para gerenciar todos os dados.
+      </p>
+    {% endif %}
+  </section>
+</main>
+</body>
+</html>

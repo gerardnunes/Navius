@@ -1,0 +1,31 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<title>Cadastro — Análise Oceanográfica</title>
+<link rel="stylesheet" href="{% static 'dashboard/style.css' %}">
+<link rel="stylesheet" href="{% static 'core/style.css' %}">
+</head>
+<body>
+<header>
+  <h1>Análise Oceanográfica e Batimétrica</h1>
+</header>
+<main class="auth-main">
+  <section class="auth-card">
+    <h2>Criar conta</h2>
+    <form method="post">
+      {% csrf_token %}
+      {% for field in form %}
+        <label>{{ field.label }}
+          {{ field }}
+          {% if field.errors %}<span class="auth-erro-campo">{{ field.errors|join:" " }}</span>{% endif %}
+        </label>
+      {% endfor %}
+      <button type="submit">CRIAR CONTA</button>
+    </form>
+    <p class="auth-link">Já tem conta? <a href="{% url 'core:login' %}">Entrar</a></p>
+  </section>
+</main>
+</body>
+</html>

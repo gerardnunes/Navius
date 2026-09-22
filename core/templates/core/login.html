@@ -1,0 +1,34 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<title>Entrar — Análise Oceanográfica</title>
+<link rel="stylesheet" href="{% static 'dashboard/style.css' %}">
+<link rel="stylesheet" href="{% static 'core/style.css' %}">
+</head>
+<body>
+<header>
+  <h1>Análise Oceanográfica e Batimétrica</h1>
+</header>
+<main class="auth-main">
+  <section class="auth-card">
+    <h2>Entrar</h2>
+    {% if form.errors %}
+      <p class="auth-erro">Usuário ou senha inválidos.</p>
+    {% endif %}
+    <form method="post">
+      {% csrf_token %}
+      <label>Usuário
+        <input type="text" name="username" required autofocus>
+      </label>
+      <label>Senha
+        <input type="password" name="password" required>
+      </label>
+      <button type="submit">ENTRAR</button>
+    </form>
+    <p class="auth-link">Não tem conta? <a href="{% url 'core:signup' %}">Cadastre-se</a></p>
+  </section>
+</main>
+</body>
+</html>

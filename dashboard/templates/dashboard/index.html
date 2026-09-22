@@ -1,0 +1,66 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<title>Análise Oceanográfica e Batimétrica</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<link rel="stylesheet" href="{% static 'dashboard/style.css' %}">
+</head>
+<body>
+
+<header>
+  <h1>Análise Oceanográfica e Batimétrica</h1>
+  <nav>
+    <a href="/surveys/">⚓ Módulo de Batimetria</a> ·
+    {% if user.is_authenticated %}
+      <a href="{% url 'core:profile' %}">👤 {{ user.username }}</a>
+    {% else %}
+      <a href="{% url 'core:login' %}">Entrar</a> · <a href="{% url 'core:signup' %}">Cadastrar</a>
+    {% endif %}
+  </nav>
+</header>
+
+<main>
+  <section id="painel-esquerdo">
+    <h2>Local</h2>
+
+    <form id="form-coordenadas">
+      <label>Latitude
+        <input type="number" step="any" id="input-lat" placeholder="-21.123456" required>
+      </label>
+      <label>Longitude
+        <input type="number" step="any" id="input-lon" placeholder="-40.987654" required>
+      </label>
+      <button type="submit">ANALISAR LOCAL</button>
+    </form>
+
+    <p class="dica">Ou clique em qualquer ponto do mapa.</p>
+
+    <div id="mapa"></div>
+
+    <div id="usv-controles">
+      <button type="button" id="btn-usv-iniciar">INICIAR SIMULAÇÃO USV</button>
+      <button type="button" id="btn-usv-parar" disabled>PARAR USV</button>
+    </div>
+  </section>
+
+  <section id="painel-direito">
+    <h2>Condições do local</h2>
+    <div id="status-mensagem"></div>
+    <div id="resultado"></div>
+
+    <section id="previsao-mare" class="subsecao">
+      <h3>Previsão de maré </h3>
+      <button type="button" id="btn-prever-mare" disabled title="Analise um local primeiro (formulário ou clique no mapa)">PREVER MARÉ (+2h)</button>
+      <p class="dica-mare">Analise um local acima primeiro o botão libera depois que as condições aparecerem.</p>
+      <div id="previsao-mare-status"></div>
+      <div id="previsao-mare-resultado"></div>
+    </section>
+  </section>
+</main>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="{% static 'dashboard/dashboard.js' %}"></script>
+</body>
+</html>

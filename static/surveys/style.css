@@ -1,0 +1,53 @@
+#form-upload {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 360px;
+}
+
+#form-upload input[type="text"], #form-upload input[type="file"] {
+  width: 100%;
+}
+
+#upload-status { margin: 10px 0; font-size: 0.85rem; }
+#upload-status.erro { color: #f85149; }
+#upload-status.sucesso { color: #3fb950; }
+#upload-status.carregando { color: #9fb3c8; }
+
+select#select-survey {
+  width: 100%;
+  padding: 6px 8px;
+  border-radius: 6px;
+  border: 1px solid #1c3a52;
+  background: #0f2436;
+  color: #e6edf3;
+  margin-bottom: 10px;
+}
+
+#mapa-survey {
+  height: 380px;
+  border-radius: 8px;
+  border: 1px solid #1c3a52;
+}
+
+#stats-survey table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.85rem;
+  margin-bottom: 16px;
+}
+#stats-survey td { padding: 4px 8px; border-bottom: 1px solid #1c3a52; }
+
+#correlacao-status { font-size: 0.85rem; margin: 8px 0; }
+#correlacao-resultado table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.78rem;
+}
+#correlacao-resultado th, #correlacao-resultado td {
+  padding: 4px 6px;
+  border-bottom: 1px solid #1c3a52;
+  text-align: left;
+}
+
+.ponto-outlier { color: #f85149; font-weight: 600; }
